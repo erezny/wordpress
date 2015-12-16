@@ -3,7 +3,7 @@ FROM php:5.6-apache
 RUN a2enmod rewrite
 
 # install the PHP extensions we need
-RUN apt-get update && apt-get install -y libpng12-dev libjpeg-dev && rm -rf /var/lib/apt/lists/* \
+RUN apt-get update && apt-get install -y libpng12-dev libjpeg-dev unzip curl wget net-tools && rm -rf /var/lib/apt/lists/* \
 	&& docker-php-ext-configure gd --with-png-dir=/usr --with-jpeg-dir=/usr \
 	&& docker-php-ext-install gd mysqli opcache
 
@@ -29,6 +29,12 @@ RUN curl -o wordpress.tar.gz -SL https://wordpress.org/wordpress-${WORDPRESS_VER
 	&& tar -xzf wordpress.tar.gz -C /usr/src/ \
 	&& rm wordpress.tar.gz \
 	&& chown -R www-data:www-data /usr/src/wordpress
+
+RUN curl -o wp-property.zip https://downloads.wordpress.org/plugin/wp-property.2.1.4.zip \
+  && curl -o wp-invoice.zip https://downloads.wordpress.org/plugin/wp-invoice.4.0.2.zip \
+	&& unzip -o wp-property.zip -d /usr/src/wordpress/wp-content/plugins/ \
+	&& unzip -o wp-invoice.zip -d /usr/src/wordpress/wp-content/plugins/
+
 
 COPY docker-entrypoint.sh /entrypoint.sh
 
