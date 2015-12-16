@@ -1,6 +1,6 @@
 FROM php:5.6-apache
 
-RUN a2enmod rewrite
+RUN a2enmod rewrite expires
 
 # install the PHP extensions we need
 RUN apt-get update && apt-get install -y libpng12-dev libjpeg-dev unzip curl wget net-tools && rm -rf /var/lib/apt/lists/* \
@@ -20,8 +20,8 @@ RUN { \
 
 VOLUME /var/www/html
 
-ENV WORDPRESS_VERSION 4.3.1
-ENV WORDPRESS_SHA1 b2e5652a6d2333cabe7b37459362a3e5b8b66221
+ENV WORDPRESS_VERSION 4.4
+ENV WORDPRESS_SHA1 d647a77c63f2ba06578f7747bd4ac295e032f57a
 
 # upstream tarballs include ./wordpress/ so this gives us /usr/src/wordpress
 RUN curl -o wordpress.tar.gz -SL https://wordpress.org/wordpress-${WORDPRESS_VERSION}.tar.gz \
