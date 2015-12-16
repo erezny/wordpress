@@ -30,10 +30,10 @@ RUN curl -o wordpress.tar.gz -SL https://wordpress.org/wordpress-${WORDPRESS_VER
 	&& rm wordpress.tar.gz \
 	&& chown -R www-data:www-data /usr/src/wordpress
 
-RUN curl -o wp-property.zip https://downloads.wordpress.org/plugin/wp-property.2.1.4.zip \
-  && curl -o wp-invoice.zip https://downloads.wordpress.org/plugin/wp-invoice.4.0.2.zip \
-	&& unzip -o wp-property.zip -d /usr/src/wordpress/wp-content/plugins/ \
-	&& unzip -o wp-invoice.zip -d /usr/src/wordpress/wp-content/plugins/
+//RUN curl -o wp-property.zip https://downloads.wordpress.org/plugin/wp-property.2.1.4.zip \
+//  && curl -o wp-invoice.zip https://downloads.wordpress.org/plugin/wp-invoice.4.0.2.zip \
+//	&& unzip -o wp-property.zip -d /usr/src/wordpress/wp-content/plugins/ \
+//	&& unzip -o wp-invoice.zip -d /usr/src/wordpress/wp-content/plugins/
 
 
 COPY docker-entrypoint.sh /entrypoint.sh
